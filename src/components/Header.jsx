@@ -4,7 +4,6 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const handleMenuClick = () => {
-    // console.log("click");
     // it doesn't take anything, becuse we have not set the payload in store yet
     dispatch(toggleMenuIcon());
   };

@@ -1,16 +1,13 @@
-import { useEffect } from "react";
-import { YOUTUBE_VIDEOS_API_URL } from "../utils/constant";
+import { useVideos } from "../hooks/useVideos";
+import VideoCard from "./VideoCard";
 
 const VideoContainer = () => {
-  const getVideos = async () => {
-    const data = await fetch(YOUTUBE_VIDEOS_API_URL);
-    const videos = await data.json();
-    console.log(videos); // Output the fetched video data to the console.
-  };
-  useEffect(() => {
-    getVideos();
-  }, []);
-  return <div>VideoContainer</div>;
+  useVideos();
+  return (
+    <div>
+      <VideoCard />
+    </div>
+  );
 };
 
 export default VideoContainer;

@@ -10,6 +10,7 @@ import {
   FaBookmark,
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const isMenuIconOpen = useSelector((store) => store.app?.isMenuOpen);
@@ -19,9 +20,11 @@ const Sidebar = () => {
     <div className="p-5 shadow-lg w-[12rem] space-y-5">
       {/* Home & Main Links */}
       <ul className="space-y-3">
-        <li className="flex items-center gap-3 cursor-pointer hover:text-blue-500">
-          <FaHome /> Home
-        </li>
+        <Link to="/">
+          <li className="flex items-center gap-3 cursor-pointer hover:text-blue-500">
+            <FaHome /> Home
+          </li>
+        </Link>
         <li className="flex items-center gap-3 cursor-pointer hover:text-blue-500">
           <FaVideo /> Videos
         </li>
