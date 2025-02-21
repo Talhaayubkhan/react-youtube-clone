@@ -16,10 +16,10 @@ const VideoCard = () => {
 
         return (
           <Link to={`/watch?v=${video.id}`} key={video.id}>
-            <div className="p-2 m-2 w-66 shadow-lg">
+            <div className="p-3 mt-2 w-68 shadow-lg">
               <img alt="tumbnail" src={thumbnails?.medium?.url} />
               <ul>
-                <li className="font-bold">{title}</li>
+                <li className="font-bold text-sm">{title}</li>
                 <li>
                   <span className="font-semibold">Views:</span> {viewCount}
                 </li>
