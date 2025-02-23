@@ -1,7 +1,7 @@
 import { buttonList } from "../utils/constant";
 const Button = () => {
   return (
-    <div>
+    <div className="mt-4">
       {buttonList.map((button) => (
         <button
           key={button.id}

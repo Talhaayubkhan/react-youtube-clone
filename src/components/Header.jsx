@@ -1,7 +1,21 @@
 import { useDispatch } from "react-redux";
 import { toggleMenuIcon } from "../utils/appSlice";
+import { useEffect, useState } from "react";
+import { YOUTUB_SEARCH_SUGGESTIONS_API_URL } from "../utils/constant";
 const Header = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(searchQuery);
+    getSearchSuggestion();
+  }, [searchQuery]);
+
+  const getSearchSuggestion = async () => {
+    const data = await fetch(YOUTUB_SEARCH_SUGGESTIONS_API_URL + searchQuery);
+    const json = await data.json();
+    console.log(json[1]);
+  };
 
   const handleMenuClick = () => {
     dispatch(toggleMenuIcon());
@@ -27,6 +41,8 @@ const Header = () => {
           type="text"
           className="w-[30rem] border border-gray-500 p-2 rounded-l-full"
           placeholder="Search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <button className="border border-gray-500 p-2 rounded-r-full bg-gray-100">
           🔍

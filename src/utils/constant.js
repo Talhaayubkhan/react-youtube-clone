@@ -22,4 +22,7 @@ export const YOUTUBE_VIDEOS_API_URL =
   " https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&key=" +
   YOUTUBE_VIDEOS_API_KEY;
 
+export const YOUTUB_SEARCH_SUGGESTIONS_API_URL =
+  "https://corsproxy.io/?http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+
 export const currDate = new Date().toLocaleDateString().split("T")[0];
