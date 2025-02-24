@@ -7,7 +7,7 @@ const VideoCard = () => {
   if (!getAllVideos) return;
 
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap gap-3 mt-5 px-3">
       {getAllVideos.map((video) => {
         const { snippet, statistics } = video;
         const { title, thumbnails, publishedAt } = snippet;
@@ -16,8 +16,12 @@ const VideoCard = () => {
 
         return (
           <Link to={`/watch?v=${video.id}`} key={video.id}>
-            <div className="p-4 mt-2 w-68 shadow-lg">
-              <img alt="tumbnail" src={thumbnails?.medium?.url} />
+            <div className="p-3 max-w-72 shadow-xl rounded-xl border border-gray-500">
+              <img
+                alt="tumbnail"
+                src={thumbnails?.medium?.url}
+                className="rounded-xl"
+              />
               <ul>
                 <li className="font-bold text-sm">{title}</li>
                 <li>
@@ -27,8 +31,9 @@ const VideoCard = () => {
                   <span className="font-semibold">Likes:</span> {likeCount}
                 </li>
               </ul>
-              <div className="text-gray-700 font-semibold text-xs">
-                Published on: {currDate} | {formatPublishedDate}
+              <div className="text-gray-900 text-xs">
+                <span className="font-semibold"> Published on:</span> {currDate}{" "}
+                | {formatPublishedDate}
               </div>
             </div>
           </Link>

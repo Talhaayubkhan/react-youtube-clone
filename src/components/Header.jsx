@@ -1,25 +1,27 @@
-import { useDispatch } from "react-redux";
 import { toggleMenuIcon } from "../utils/appSlice";
-import { useEffect, useState } from "react";
-import { YOUTUB_SEARCH_SUGGESTIONS_API_URL } from "../utils/constant";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { FaSearch as SearchIcon } from "react-icons/fa";
+import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
+
 const Header = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
+  const [showSuggestionsList, setShowSuggestionsList] = useState(false);
 
-  useEffect(() => {
-    console.log(searchQuery);
-    getSearchSuggestion();
-  }, [searchQuery]);
-
-  const getSearchSuggestion = async () => {
-    const data = await fetch(YOUTUB_SEARCH_SUGGESTIONS_API_URL + searchQuery);
-    const json = await data.json();
-    console.log(json[1]);
-  };
+  const { searchQuery, setSearchQuery, showSuggestions } =
+    useSearchSuggestions();
 
   const handleMenuClick = () => {
     dispatch(toggleMenuIcon());
   };
+
+  const handleBlurMove = () => {
+    const timer = setTimeout(() => {
+      setShowSuggestionsList(false);
+    }, 300);
+    return () => clearTimeout(timer);
+  };
+
   return (
     <div className="shadow-lg flex justify-between items-center p-4">
       <div className="flex">
@@ -36,17 +38,37 @@ const Header = () => {
         />
       </div>
 
-      <div className="">
-        <input
-          type="text"
-          className="w-[30rem] border border-gray-500 p-2 rounded-l-full"
-          placeholder="Search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button className="border border-gray-500 p-2 rounded-r-full bg-gray-100">
-          🔍
-        </button>
+      <div>
+        <div>
+          <input
+            type="text"
+            className="w-[30rem] border border-gray-500 p-2 rounded-l-full"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => setShowSuggestionsList(true)}
+            onBlur={handleBlurMove}
+          />
+          <button className="border border-gray-500 p-2 rounded-r-full cursor-pointer bg-gray-100">
+            🔍
+          </button>
+        </div>
+        {showSuggestionsList && (
+          <div className="absolute bg-white w-[30rem] py-2 px-4 border-gray-300 rounded-lg shadow-lg">
+            <ul className="space-y-1">
+              {showSuggestions.map((s) => {
+                return (
+                  <li
+                    className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 p-2 font-semibold text-lg rounded"
+                    key={s}
+                  >
+                    <SearchIcon className="text-gray-500" /> {s}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
 
       <div className="flex justify-center items-center">
