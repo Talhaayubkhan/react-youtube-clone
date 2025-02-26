@@ -7,7 +7,7 @@ const VideoCard = () => {
   if (!getAllVideos) return;
 
   return (
-    <div className="flex flex-wrap gap-3 mt-5 px-3">
+    <div className="flex items-center justify-center flex-wrap gap-3 mt-5 px-3">
       {getAllVideos.map((video) => {
         const { snippet, statistics } = video;
         const { title, thumbnails, publishedAt } = snippet;
