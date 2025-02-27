@@ -2,7 +2,7 @@ import Button from "./Button";
 
 const ButtonList = () => {
   return (
-    <div>
+    <div className="flex justify-center items-center">
       <Button />
     </div>
   );

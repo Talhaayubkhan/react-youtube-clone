@@ -19,7 +19,7 @@ export const useSearchSuggestions = () => {
         // ✅ If not in cache, fetch new suggestions from the API
         getSearchSuggestion();
       }
-    }, 300);
+    }, 250);
 
     return () => {
       clearTimeout(timer);
@@ -27,7 +27,7 @@ export const useSearchSuggestions = () => {
   }, [searchQuery]);
 
   const getSearchSuggestion = async () => {
-    console.log("API CALL - ", searchQuery);
+    // console.log("API CALL - ", searchQuery);
 
     const data = await fetch(YOUTUB_SEARCH_SUGGESTIONS_API_URL + searchQuery);
     const json = await data.json();
