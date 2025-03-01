@@ -3,10 +3,13 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { FaSearch as SearchIcon } from "react-icons/fa";
 import { useSearchSuggestions } from "../hooks/useSearchSuggestions";
+import { USER_ICON } from "../utils/constant";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const dispatch = useDispatch();
   const [showSuggestionsList, setShowSuggestionsList] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { searchQuery, setSearchQuery, showSuggestions } =
     useSearchSuggestions();
@@ -20,6 +23,12 @@ const Header = () => {
       setShowSuggestionsList(false);
     }, 300);
     return () => clearTimeout(timer);
+  };
+
+  const handleSuggestionsClick = () => {
+    dispatch(toggleMenuIcon());
+    navigate(`/results`);
+    setShowSuggestionsList(false);
   };
 
   return (
@@ -61,6 +70,7 @@ const Header = () => {
                   <li
                     className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 p-2 font-semibold text-lg rounded"
                     key={s}
+                    onClick={handleSuggestionsClick}
                   >
                     <SearchIcon className="text-gray-500" /> {s}
                   </li>
@@ -77,11 +87,7 @@ const Header = () => {
           src="https://i.pinimg.com/550x/f2/58/4f/f2584f450c74bee72c123c4184c58df7.jpg"
           className="h-8 px-3"
         />
-        <img
-          alt="user_icon"
-          src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small_2x/user-profile-icon-free-vector.jpg"
-          className="h-10"
-        />
+        <img alt="user_icon" src={USER_ICON} className="h-10" />
       </div>
     </div>
   );

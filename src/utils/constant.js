@@ -15,6 +15,8 @@ export const buttonList = [
   { id: 15, label: "Polticis" },
 ];
 
+export const USER_ICON =
+  "https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small_2x/user-profile-icon-free-vector.jpg";
 export const YOUTUBE_VIDEOS_API_KEY = import.meta.env
   .VITE_YOUTUBE_VIDEOS_API_KEY;
 
