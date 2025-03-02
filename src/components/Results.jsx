@@ -1,12 +1,11 @@
-import { useSelector } from "react-redux";
-import VideoCard from "./VideoCard";
+import Videos from "./Videos";
+import { useVideosResult } from "../hooks/useVieosResult";
 
 const Results = () => {
-  const isMenuIconOpen = useSelector((store) => store.app?.isMenuOpen);
-  if (!isMenuIconOpen) return null;
+  const { videoResults } = useVideosResult();
   return (
     <div>
-      <VideoCard />
+      <Videos videos={videoResults} />
     </div>
   );
 };

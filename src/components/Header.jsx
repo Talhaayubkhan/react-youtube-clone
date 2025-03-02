@@ -25,10 +25,16 @@ const Header = () => {
     return () => clearTimeout(timer);
   };
 
-  const handleSuggestionsClick = () => {
+  const handleSuggestionsClick = (showSuggestions) => {
     dispatch(toggleMenuIcon());
-    navigate(`/results`);
+    navigate(`/results?search_query=${showSuggestions}`);
     setShowSuggestionsList(false);
+    setSearchQuery(showSuggestions);
+  };
+  const handleSearch = (showSuggestions) => {
+    if (!searchQuery.trim()) return;
+    navigate(`/results?search_query=${showSuggestions}`);
+    setSearchQuery(showSuggestions);
   };
 
   return (
@@ -58,7 +64,10 @@ const Header = () => {
             onFocus={() => setShowSuggestionsList(true)}
             onBlur={handleBlurMove}
           />
-          <button className="border border-gray-500 p-2 rounded-r-full cursor-pointer bg-gray-100">
+          <button
+            className="border border-gray-500 p-2 rounded-r-full cursor-pointer bg-gray-100"
+            onClick={() => handleSearch(searchQuery)}
+          >
             🔍
           </button>
         </div>
@@ -70,7 +79,7 @@ const Header = () => {
                   <li
                     className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 p-2 font-semibold text-lg rounded"
                     key={s}
-                    onClick={handleSuggestionsClick}
+                    onClick={() => handleSuggestionsClick(s)}
                   >
                     <SearchIcon className="text-gray-500" /> {s}
                   </li>
