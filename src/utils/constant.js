@@ -25,7 +25,7 @@ export const YOUTUBE_VIDEOS_API_URL = `https://youtube.googleapis.com/youtube/v3
 export const YOUTUB_SEARCH_SUGGESTIONS_API_URL =
   "https://corsproxy.io/?http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
 
-export const youtubeSearchResultsURL = (query) => {
+export const youtubeSuggestionsResultsURL = (query) => {
   return `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&videoDefinition=high&videoEmbeddable=true&maxResults=50&regionCode=US&key=${YOUTUBE_VIDEOS_API_KEY}`;
 };
 
