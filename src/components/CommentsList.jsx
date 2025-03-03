@@ -5,7 +5,7 @@ const CommentsList = ({ comments }) => {
     <div key={comment.key}>
       <Comment data={comment} />
       <div className="ml-10 border-l-2 border-gray-300">
-        <CommentsList comments={comment.replies} />
+        {/* <CommentsList comments={comment.replies} /> */}
       </div>
     </div>
   ));

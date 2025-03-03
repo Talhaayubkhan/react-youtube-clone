@@ -26,7 +26,7 @@ export const YOUTUB_SEARCH_SUGGESTIONS_API_URL =
   "https://corsproxy.io/?http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
 
 export const youtubeSuggestionsResultsURL = (query) => {
-  return `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&videoDefinition=high&videoEmbeddable=true&maxResults=50&regionCode=US&key=${YOUTUBE_VIDEOS_API_KEY}`;
+  return `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&videoDefinition=high&videoEmbeddable=true&maxResults=25&regionCode=US&key=${YOUTUBE_VIDEOS_API_KEY}`;
 };
 
 export const currDate = new Date().toLocaleDateString().split("T")[0];

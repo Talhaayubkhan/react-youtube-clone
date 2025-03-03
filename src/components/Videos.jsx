@@ -1,14 +1,11 @@
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { currDate } from "../utils/constant";
-import NotFound from "./NotFound";
 
 const Videos = ({ videos }) => {
-  return videos?.length === 0 ? (
-    <NotFound />
-  ) : (
+  return (
     <div className="flex flex-col gap-4 px-5 ml-5 mt-5">
-      {videos.map((video) => {
+      {videos?.map((video) => {
         const { snippet } = video;
         const { title, channelTitle, publishedAt, description, thumbnails } =
           snippet;
