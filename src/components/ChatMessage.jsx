@@ -1,13 +1,14 @@
-const ChatMessage = ({ name, message, avatar, timestamp }) => {
+import { USER_ICON } from "../utils/constant";
+
+const ChatMessage = ({ name, message, image }) => {
   return (
-    <div className="flex items-center text-2xl">
-      <img src={avatar} alt={name} className="rounded-full h-12 w-12 mr-4" />
-      <div className="flex-1">
-        <div className="font-semibold">{name}</div>
+    <>
+      <div className="flex flex-row items-center py-2">
+        <img src={USER_ICON} className="w-12 h-12 rounded-2xl" alt="user" />
+        <div className="font-semibold px-2">{name}</div>
         <div className="text-gray-500">{message}</div>
-        <div className="text-xs text-gray-600">{timestamp}</div>
       </div>
-    </div>
+    </>
   );
 };
 
