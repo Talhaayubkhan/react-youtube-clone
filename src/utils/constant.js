@@ -29,4 +29,8 @@ export const youtubeSuggestionsResultsURL = (query) => {
   return `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&videoDefinition=high&videoEmbeddable=true&maxResults=25&regionCode=US&key=${YOUTUBE_VIDEOS_API_KEY}`;
 };
 
+export const YOUTUBE_COMMENTS_API_URL = (parentId) => {
+  return `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet,replies&videoId=${parentId}&maxResults=50&textFormat=plainText&key=${YOUTUBE_VIDEOS_API_KEY}`;
+};
+
 export const currDate = new Date().toLocaleDateString().split("T")[0];
