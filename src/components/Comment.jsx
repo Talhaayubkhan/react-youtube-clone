@@ -1,23 +1,40 @@
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 
 const Comment = ({ data }) => {
-  const { user, text, replies, avatar, timestamp, likes, dislikes } = data;
+  const { user, text, avatar, timestamp, likes, dislikes, key } = data;
 
   return (
-    <div className="flex gap-4 mt-5 items-start bg-gray-100 p-4 rounded-lg">
-      <img src={avatar} alt="user" className="w-12 h-12 rounded-full" />
-      <div className="flex-1">
+    <div
+      key={key}
+      className="flex gap-4 mt-4 p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
+    >
+      {/* User Avatar */}
+      <img
+        src={avatar}
+        alt="user"
+        className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full border border-gray-300"
+      />
+
+      {/* Comment Content */}
+      <div className="flex-1 overflow-hidden">
+        {/* User Info */}
         <div className="flex items-center gap-2">
-          <h1 className="font-semibold">{user}</h1>
-          <p className="text-gray-500 text-sm">{timestamp}</p>
+          <h1 className="font-semibold text-gray-800 truncate">{user}</h1>
+          <p className="text-black font-semibold text-xs">{timestamp}</p>
         </div>
-        <p className="mt-1">{text}</p>
+
+        {/* Comment Text */}
+        <p className="mt-1 text-gray-700 break-words text-sm">{text}</p>
+
+        {/* Like & Dislike Buttons */}
         <div className="flex items-center gap-3 mt-2 text-gray-500 text-sm">
-          <button className="flex items-center gap-1 hover:text-blue-500">
-            <FaThumbsUp /> <span>{likes}</span>
+          <button className="flex items-center gap-1 hover:text-blue-500 transition-colors">
+            <FaThumbsUp className="text-base" />
+            <span>{likes}</span>
           </button>
-          <button className="flex items-center gap-1 hover:text-red-500">
-            <FaThumbsDown /> <span>{dislikes}</span>
+          <button className="flex items-center gap-1 hover:text-red-500 transition-colors">
+            <FaThumbsDown className="text-base" />
+            <span>{dislikes}</span>
           </button>
         </div>
       </div>

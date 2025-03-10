@@ -1,38 +1,62 @@
 import Comment from "./Comment";
 
 const CommentsList = ({ comments }) => {
-  // console.log(comments);
-
   if (!comments || comments.length === 0) return;
+
   return comments.map((comment) => {
-    // console.log(comment);
+    if (comment.kind === "youtube#commentThread") {
+      const { snippet, replies, id } = comment;
 
-    const { snippet, replies } = comment;
+      // Extract top level comment data
+      const topLevelComment = snippet?.topLevelComment?.snippet;
+      if (!topLevelComment) return null;
 
-    const topLevelComment = snippet?.topLevelComment?.snippet;
-    const commentReplies = replies?.comments || []; // Extract replies data if available
+      const topLevelCommentData = {
+        user: topLevelComment?.authorDisplayName,
+        text: topLevelComment?.textOriginal,
+        avatar: topLevelComment?.authorProfileImageUrl || "No Avatar",
+        timestamp: topLevelComment.publishedAt
+          ? new Date(topLevelComment.publishedAt).toLocaleString()
+          : "No date",
+        likes: topLevelComment?.likeCount,
+        dislikes: 0,
+        key: id,
+      };
 
-    const commentsData = {
-      user: topLevelComment?.authorDisplayName,
-      text: topLevelComment?.textOriginal,
-      avatar: topLevelComment?.authorProfileImageUrl,
-      timestamp: new Date(topLevelComment?.publishedAt).toLocaleString(),
-      likes: topLevelComment?.likeCount,
-      dislikes: 0,
-    };
-    const nestedComment = {
-      replies: commentReplies,
-    };
-    return (
-      <div key={comment.key}>
-        <Comment data={commentsData} />
-        {nestedComment?.replies.length > 0 && (
-          <div className="ml-10 border-l-2 border-gray-300">
-            <CommentsList comments={nestedComment?.replies} />
-          </div>
-        )}
-      </div>
-    );
+      // Extract replies to this comment thread
+      const repliesList = replies?.comments || [];
+
+      return (
+        <div key={topLevelCommentData.key}>
+          <Comment data={topLevelCommentData} />
+          {repliesList?.length > 0 && (
+            <div className="ml-10 border-l-2 border-gray-500">
+              <CommentsList comments={repliesList} />
+            </div>
+          )}
+        </div>
+      );
+    } else if (comment.kind === "youtube#comment") {
+      const { snippet, id } = comment;
+      const replyCommentData = {
+        user: snippet?.authorDisplayName,
+        text: snippet?.textOriginal,
+        avatar: snippet?.authorProfileImageUrl,
+        timestamp: snippet?.publishedAt
+          ? new Date(snippet.publishedAt).toLocaleString()
+          : "No date",
+        likes: snippet?.likeCount || 0,
+        dislikes: 0,
+        key: id,
+      };
+      return (
+        <div key={replyCommentData.key}>
+          <Comment data={replyCommentData} />
+        </div>
+      );
+    }
+
+    return null; // Ensure every case has a return statement
   });
 };
 
