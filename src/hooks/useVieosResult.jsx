@@ -14,7 +14,7 @@ export const useVideosResult = () => {
       const fetchResults = youtubeSuggestionsResultsURL(searchQuery);
       const data = await fetch(fetchResults);
       const response = await data.json();
-      // console.log(response);
+      console.log(response);
       setVideosResults(response.items);
     } catch (error) {
       console.error("Error fetching results: " + error);
