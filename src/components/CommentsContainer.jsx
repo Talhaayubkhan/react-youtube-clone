@@ -1,4 +1,4 @@
-import { useFetchComments } from "../hooks/usefetchComments";
+import { useFetchComments } from "../hooks/useFetchComments";
 import CommentsList from "./CommentsList";
 const CommentsContainer = () => {
   const { comments } = useFetchComments();
