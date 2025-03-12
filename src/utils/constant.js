@@ -13,6 +13,11 @@ export const buttonList = [
   { id: 13, label: "Geography" },
   { id: 14, label: "Darama" },
   { id: 15, label: "Polticis" },
+  { id: 16, label: "History" },
+  { id: 17, label: "Circket" },
+  { id: 18, label: "Trump" },
+  { id: 19, label: "South Movies" },
+  { id: 20, label: "Pakistani Movies" },
 ];
 
 export const USER_ICON =

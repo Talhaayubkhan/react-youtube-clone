@@ -7,7 +7,6 @@ const Button = () => {
   const handleButtonClick = async (query) => {
     const url = youtubeSuggestionsResultsURL(query);
     try {
-      // Logic to fetch video results based on the selected button label
       const response = await fetch(url);
       const data = await response.json();
       setVideoResults(data.items || []);
@@ -18,12 +17,12 @@ const Button = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="mt-5">
+    <div className="w-full px-2 py-2 mt-5">
+      <div className="flex overflow-x-auto gap-2 pb-2">
         {buttonList.map((button) => (
           <button
             key={button.id}
-            className="px-4 py-3 text-lg font-semibold rounded-lg ml-4 bg-gray-200 hover:bg-blue-500 hover:text-white cursor-pointer"
+            className="px-3 py-1.5 ml-1 text-sm font-medium bg-gray-200 rounded-full hover:bg-blue-500 hover:text-white transition-colors duration-200 whitespace-nowrap"
             onClick={() => handleButtonClick(button.label)}
           >
             {button.label}
@@ -31,7 +30,7 @@ const Button = () => {
         ))}
       </div>
 
-      <div className="mt-5 flex flex-wrap justify-center gap-3">
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {videoResults?.map((video) => {
           const { snippet } = video;
           const { title, thumbnails, description } = snippet;
@@ -40,22 +39,19 @@ const Button = () => {
           return (
             <div
               key={videoId}
-              className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-72 flex flex-col items-center overflow-hidden"
+              className="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
             >
               <img
-                className="w-full h-40 object-cover rounded-lg"
+                className="w-full h-36 object-cover rounded-md"
                 src={thumbnails.high.url}
                 alt={title}
               />
-              <div className="mt-3 text-center w-full">
-                <h3
-                  className="text-sm font-semibold truncate w-full"
-                  title={title}
-                >
+              <div className="mt-2">
+                <h3 className="text-sm font-medium line-clamp-2" title={title}>
                   {title}
                 </h3>
                 <p
-                  className="text-gray-600 text-xs mt-1 line-clamp-3 overflow-hidden w-full"
+                  className="text-xs text-gray-500 mt-1 line-clamp-2"
                   title={description}
                 >
                   {description}
