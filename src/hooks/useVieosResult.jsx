@@ -4,6 +4,8 @@ import { useSearchParams } from "react-router-dom";
 
 export const useVideosResult = () => {
   const [videoResults, setVideosResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // NEW
+
   const [videoParams] = useSearchParams();
   const searchQuery = videoParams.get("search_query");
 
@@ -11,11 +13,13 @@ export const useVideosResult = () => {
     if (!searchQuery || searchQuery.trim() === "") return;
 
     try {
+      setIsLoading(true); // Start loading
+
       const fetchResults = youtubeSuggestionsResultsURL(searchQuery);
       const data = await fetch(fetchResults);
       const response = await data.json();
-      console.log(response);
       setVideosResults(response.items);
+      setIsLoading(false); // Loading finished
     } catch (error) {
       console.error("Error fetching results: " + error);
       setVideosResults([]);
@@ -26,5 +30,5 @@ export const useVideosResult = () => {
     getResults();
   }, [searchQuery]);
 
-  return { videoResults };
+  return { videoResults, isLoading };
 };

@@ -2,11 +2,11 @@ import Videos from "./Videos";
 import { useVideosResult } from "../hooks/useVieosResult";
 
 const Results = () => {
-  const { videoResults } = useVideosResult();
+  const { videoResults, isLoading } = useVideosResult();
 
   return (
     <div>
-      <Videos videos={videoResults} />
+      <Videos videos={videoResults} isLoading={isLoading} />
     </div>
   );
 };

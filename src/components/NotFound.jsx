@@ -5,15 +5,27 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex m-auto flex-col items-center justify-center h-[80vh] text-gray-700 animate-fadeIn">
-      <FaSearch className="text-8xl text-gray-400 mb-6 animate-pulse" />
-      <h1 className="text-4xl text-red-600 font-bold">No Videos Found</h1>
-      <p className="text-lg text-gray-700 font-bold mt-2 max-w-lg text-center">
-        Try searching with different keywords or explore trending videos.
+    <div className="flex flex-col items-center justify-center mx-auto min-h-[80vh] px-4 text-gray-700 animate-fadeIn">
+      {/* Icon */}
+      <div className="bg-gray-100 p-6 rounded-full mb-6">
+        <FaSearch className="text-6xl text-gray-400 animate-pulse" />
+      </div>
+
+      {/* Heading */}
+      <h1 className="text-3xl md:text-4xl font-bold text-red-600 mb-2">
+        No Videos Found
+      </h1>
+
+      {/* Subtext */}
+      <p className="text-base md:text-lg text-gray-600 max-w-md text-center mb-6">
+        Sorry, we couldn't find any results. Try searching with different
+        keywords or explore trending videos.
       </p>
+
+      {/* Button */}
       <button
         onClick={() => navigate("/")}
-        className="mt-6 px-5 py-2 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md transition duration-300"
+        className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold shadow-md transition-all duration-300"
       >
         Go to Homepage
       </button>

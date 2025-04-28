@@ -1,11 +1,29 @@
-import { format } from "date-fns";
 import { Link } from "react-router-dom";
-// import { currDate } from "../utils/constant";
+import { format } from "date-fns";
+import SkeletonCard from "./SkeletonCard"; // Import Skeleton
+import NotFound from "./NotFound";
 
-const Videos = ({ videos }) => {
+const Videos = ({ videos, isLoading }) => {
+  if (isLoading) {
+    // Show 8 skeletons while loading
+    return (
+      <div className="grid md:px-6 lg:px-8 mt-4 space-y-4">
+        {Array(25)
+          .fill("")
+          .map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+      </div>
+    );
+  }
+
+  if (!videos || videos?.length === 0) {
+    return <NotFound />;
+  }
+
   return (
     <div className="grid md:px-6 lg:px-8 mt-4">
-      {videos?.map((video) => {
+      {videos.map((video) => {
         const { snippet } = video;
         const {
           title,

@@ -1,5 +1,4 @@
 import Body from "./components/Body";
-import Headers from "./components/Header";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./utils/store";
