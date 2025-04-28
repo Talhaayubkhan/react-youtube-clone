@@ -8,7 +8,7 @@ const VideoCard = () => {
   if (!getAllVideos) return null;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-6">
+    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 p-4 bg-gray-100 min-h-screen">
       {getAllVideos.map((video) => {
         const { snippet, statistics, contentDetails } = video;
         const { title, thumbnails, publishedAt, channelTitle, channelId } =
@@ -28,43 +28,53 @@ const VideoCard = () => {
 
         return (
           <Link to={`/watch?v=${video.id}`} key={video.id}>
-            <div className="w-full hover:scale-105 transition-transform duration-200">
-              <div className="relative">
+            <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+              {/* Thumbnail */}
+              <div className="relative overflow-hidden">
                 <img
                   alt={title}
                   src={thumbnails?.high?.url}
-                  className="w-full h-44 object-cover rounded-lg"
+                  className="w-full h-48 object-cover transition-transform duration-300 transform hover:scale-105 hover:brightness-110"
                 />
-                <span className="absolute bottom-1.5 right-1.5 bg-black bg-opacity-80 text-white text-xs font-medium px-1.5 py-0.5 rounded-md">
+                <span className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">
                   {formattedDuration}
                 </span>
               </div>
-              <div className="mt-3 flex gap-3">
-                <div>
-                  <h3 className="text-xs font-semibold leading-tight">
-                    {title}
-                  </h3>
-                  <Link
-                    to={`/channel/${channelId}`}
-                    className="text-xs text-gray-600 hover:text-gray-900 mt-1"
-                  >
-                    {channelTitle}
-                  </Link>
-                  <div className="text-xs text-gray-500 mt-1 flex items-center gap-2">
-                    <span className="flex items-center gap-1.5">
-                      <FaEye className="text-gray-400" />
-                      <span className="font-medium">{viewCount}</span>
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <FaHeart className="text-gray-400" />
-                      <span className="font-medium">{likeCount}</span>
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <FaComment className="text-gray-400" />
-                      <span className="font-medium">{commentCount}</span>
-                    </span>
-                    <span className="text-gray-500">{formattedDate}</span>
-                  </div>
+
+              {/* Content */}
+              <div className="p-3">
+                <h3
+                  className="text-sm font-bold text-gray-800 mb-1 line-clamp-2"
+                  title={title}
+                >
+                  {title}
+                </h3>
+
+                <Link
+                  to={`/channel/${channelId}`}
+                  className="text-xs text-gray-500 hover:text-blue-600"
+                >
+                  {channelTitle}
+                </Link>
+
+                {/* Stats */}
+                <div className="mt-2 flex flex-wrap gap-2 text-xs text-gray-600">
+                  <span className="flex items-center gap-1">
+                    <FaEye className="text-gray-400" />{" "}
+                    {Number(viewCount).toLocaleString()}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <FaHeart className="text-gray-400" />{" "}
+                    {Number(likeCount).toLocaleString()}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <FaComment className="text-gray-400" />{" "}
+                    {Number(commentCount).toLocaleString()}
+                  </span>
+                </div>
+
+                <div className="text-xs text-gray-400 mt-1">
+                  {formattedDate}
                 </div>
               </div>
             </div>

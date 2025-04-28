@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Videos = ({ videos }) => {
   return (
-    <div className="grid gap-4 px-4 md:px-6 lg:px-8 mt-4">
+    <div className="grid md:px-6 lg:px-8 mt-4">
       {videos?.map((video) => {
         const { snippet } = video;
         const {

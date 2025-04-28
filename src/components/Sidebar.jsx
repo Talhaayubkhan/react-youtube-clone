@@ -14,56 +14,68 @@ import {
 
 const Sidebar = () => {
   const isMenuIconOpen = useSelector((store) => store.app?.isMenuOpen);
-  if (!isMenuIconOpen) return null;
+
+  const sidebarItemClass =
+    "flex items-center gap-4 p-2 text-sm rounded-lg hover:bg-gray-100 hover:text-blue-600 transition-colors cursor-pointer";
 
   return (
-    <div className="z-20 fixed top-16 left-0 w-56 h-[calc(100vh-4rem)] p-4 bg-white shadow-md overflow-y-auto">
-      {/* Home & Main Links */}
-      <ul className="space-y-2">
-        <Link to="/">
-          <li className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-            <FaHome /> Home
+    <aside
+      className={`fixed top-0 left-0 h-screen w-60 bg-white shadow-lg p-4 overflow-y-auto z-20
+  transform transition-transform duration-300 ease-in-out
+  ${isMenuIconOpen ? "translate-x-0" : "-translate-x-full"}`}
+    >
+      <div className="pt-16">
+        {/* Home Section */}
+        <ul className="space-y-2">
+          <Link to="/">
+            <li className={sidebarItemClass}>
+              <FaHome className="text-lg" /> Home
+            </li>
+          </Link>
+          <li className={sidebarItemClass}>
+            <FaVideo className="text-lg" /> Videos
           </li>
-        </Link>
-        <li className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-          <FaVideo /> Videos
-        </li>
-        <li className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-          <FaBroadcastTower /> Live
-        </li>
-        <li className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-          <FaFilm /> Shorts
-        </li>
-      </ul>
+          <li className={sidebarItemClass}>
+            <FaBroadcastTower className="text-lg" /> Live
+          </li>
+          <li className={sidebarItemClass}>
+            <FaFilm className="text-lg" /> Shorts
+          </li>
+        </ul>
 
-      {/* Subscriptions */}
-      <h1 className="font-semibold text-base mt-4 mb-2">Subscriptions</h1>
-      <ul className="space-y-2">
-        <li className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-          <FaMusic /> Music
-        </li>
-        <li className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-          <FaFootballBall /> Sports
-        </li>
-        <li className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-          <FaGamepad /> Gaming
-        </li>
-        <li className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-          <FaFilm /> Movies
-        </li>
-      </ul>
+        <div className="border-t border-gray-200 my-4" />
 
-      {/* Watch Later */}
-      <h1 className="font-semibold text-base mt-4 mb-2">Watch Later</h1>
-      <ul className="space-y-2">
-        <li className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-          <FaClock /> Watch Later
-        </li>
-        <li className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 hover:text-blue-600 cursor-pointer">
-          <FaBookmark /> Saved
-        </li>
-      </ul>
-    </div>
+        {/* Subscriptions Section */}
+        <h2 className="text-gray-700 font-semibold mb-2">Subscriptions</h2>
+        <ul className="space-y-2">
+          <li className={sidebarItemClass}>
+            <FaMusic className="text-lg" /> Music
+          </li>
+          <li className={sidebarItemClass}>
+            <FaFootballBall className="text-lg" /> Sports
+          </li>
+          <li className={sidebarItemClass}>
+            <FaGamepad className="text-lg" /> Gaming
+          </li>
+          <li className={sidebarItemClass}>
+            <FaFilm className="text-lg" /> Movies
+          </li>
+        </ul>
+
+        <div className="border-t border-gray-200 my-4" />
+
+        {/* Watch Later Section */}
+        <h2 className="text-gray-700 font-semibold mb-2">Watch Later</h2>
+        <ul className="space-y-2">
+          <li className={sidebarItemClass}>
+            <FaClock className="text-lg" /> Watch Later
+          </li>
+          <li className={sidebarItemClass}>
+            <FaBookmark className="text-lg" /> Saved
+          </li>
+        </ul>
+      </div>
+    </aside>
   );
 };
 
